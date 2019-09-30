@@ -1,8 +1,9 @@
 #!/usr/bin/env python2
 # update by Morgan, 20190930
-
 import RPi.GPIO as GPIO
+import sys
 import time
+
 
 # Define GPIO to LCD mapping
 LCD_RS = 7
@@ -25,7 +26,7 @@ E_PULSE = 0.00005
 E_DELAY = 0.00005
 
 
-def main():
+def main(str1,str2):
     GPIO.setwarnings(False)
     # Main program block
     GPIO.setmode(GPIO.BCM)       # Use BCM GPIO numbers  
@@ -39,9 +40,9 @@ def main():
     lcd_init()
     # Send some test
     lcd_byte(LCD_LINE_1, LCD_CMD)
-    lcd_string("Hello")
+    lcd_string(str1)
     lcd_byte(LCD_LINE_2, LCD_CMD)
-    lcd_string ("Morgan")
+    lcd_string (str2)
     time.sleep(1)
     print("main")
 
@@ -109,6 +110,12 @@ def lcd_byte(bits, mode):
     time.sleep(E_DELAY)   
 
 
+st="Morgan Test     " + time.strftime("%H:%M:%S")
+if len(sys.argv)>1:         #are there any command line args?
+   st = sys.argv[1]        #yes, so take first one as text
 
+st += ' ' * 32
+str1 = st[:16]
+str2 = st[16:32]
 
-main()
+main(str1,str2)
