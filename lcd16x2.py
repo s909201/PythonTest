@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# update by Morgan, 20190930
+# update by Morgan, 20191002
 import RPi.GPIO as GPIO
 import sys
 import time
