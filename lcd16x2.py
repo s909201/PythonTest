@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/python
 # update by Morgan, 20190930
 import RPi.GPIO as GPIO
 import sys
