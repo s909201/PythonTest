@@ -1,7 +1,8 @@
 #!/usr/bin/python
-# update by Morgan, 20191003
+# update by Morgan, 20191004
 import RPi.GPIO as GPIO
 import time
+import os
 
 # Define GPIO to LED mapping
 LED_1 = 13
@@ -32,3 +33,10 @@ while count < 6:
 
 GPIO.output(LED_1, False)
 GPIO.output(LED_2, False)
+
+# LCD Show
+OurMsg = "LED_GPIO_TEST"
+filepath = "python ./lcd16x2.py"
+LCD_Str = filepath + " " + OurMsg
+print(LCD_Str)
+os.system(LCD_Str)
