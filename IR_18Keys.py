@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # created by Morgan, 20191014
 import RPi.GPIO as GPIO
-from time import time
+import time
+import os
 
 GPIO_IR = 22
 
@@ -13,9 +14,9 @@ def setup():
 
 def binary_aquire(pin, duration):
     # aquires data as quickly as possible
-    t0 = time()
+    t0 = time.time()
     results = []
-    while (time() - t0) < duration:
+    while (time.time() - t0) < duration:
         results.append(GPIO.input(pin))
     return results
 
@@ -57,18 +58,29 @@ def destroy():
     GPIO.cleanup()
 
 
+# LCD Show
+def LCD_SHOW(IRMsg):
+    filepath = "python ./lcd16x2.py"
+    LCD_Str = filepath + " " + IRMsg
+    print(LCD_Str)
+    os.system(LCD_Str)
+
+
 if __name__ == "__main__":
     setup()
     try:
         print("Starting IR Listener")
+        LCD_SHOW("IR_RECEIVER_TEST")
         while True:
             print("Waiting for signal")
             GPIO.wait_for_edge(GPIO_IR, GPIO.FALLING)
             code = on_ir_receive(GPIO_IR)
             if code:
                 print(str(hex(code)))
+                LCD_SHOW("IR_RECEIVER_TEST" + str(hex(code)))
             else:
                 print("Invalid code")
+                LCD_SHOW("IR_RECEIVER_TESTInvalid code")
     except KeyboardInterrupt:
         pass
     except RuntimeError:
