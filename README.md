@@ -1,5 +1,7 @@
 # PythonTest
 
+20191014 - add IR_18keys.py as IR Receiver practice
+
 20191004 - add BTN_GPIO.py as GPIO Input practice
 
 20191004 - add WelcomeLCD.py, LCD show "Welcome"
